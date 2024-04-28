@@ -41,14 +41,14 @@ architecture sender_tb_arch of sender_tb is
     component sender port (
             reset, clk, clk_en, btn, ready : in STD_LOGIC;
             send : out STD_LOGIC;
-            char : out STD_LOGIC_VECTOR (4 downto 0)
+            char : out STD_LOGIC_VECTOR (7 downto 0)
         );
     end component;
 
     signal rst : std_logic := '0';
     signal clk, clk_en, btn : std_logic := '0';
     signal ready : std_logic := '0';
-    signal char : std_logic_vector(4 downto 0) := (others => '0');
+    signal char : std_logic_vector(7 downto 0) := (others => '0');
     signal send : std_logic;
 begin
 
@@ -93,16 +93,16 @@ begin
         btn <='1';
         wait for 24 ns;
         btn <= '0';
-        wait for 24 ns;
+        wait for 10 ms;
     end process;
     
     -- reset process
     process begin
 
         rst <= '1';
-        wait for 1000 ns;
+        wait for 30 ms;
         rst <= '0';
-        wait for 1000 ns;
+        wait for 10 us;
     end process;
 
 end sender_tb_arch;

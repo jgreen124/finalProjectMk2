@@ -13,15 +13,17 @@ entity uart is
     clk, en, send, rx, rst      : in std_logic;
     charSend                    : in std_logic_vector (7 downto 0);
     ready, tx, newChar          : out std_logic;
-    charRec                     : out std_logic_vector (7 downto 0)
+    charRec                   : out std_logic_vector (7 downto 0)
 
 );
 end uart;
 
 architecture structural of uart is
+
+    signal tx_counter, rx_counter : integer := 0;
     component uart_tx port
     (
-        clk, en, send, rst  : in std_logic;
+        clk, en, send, rst  : in std_logic := '0';
         char                : in std_logic_vector (7 downto 0);
         ready, tx           : out std_logic
     );
